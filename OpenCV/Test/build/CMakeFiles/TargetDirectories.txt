@@ -1,0 +1,1 @@
+/home/luis/Documentos/Learn/OpenCV/Test/build/CMakeFiles/DisplayImage.dir

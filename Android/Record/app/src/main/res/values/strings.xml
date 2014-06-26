@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">"Record Quirurgico"</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="Cantidad">Cantidad</string>
+    <string name="Año">Año:</string>
+    <string name="Lugar">Lugar:</string>
+    <string name="Cirugia">Cirugia: </string>
+    <string name="Guardar">Guardar cirugias</string>
+    <string name="Informe">Enviar informe</string>
+
+    <string-array name="places_array">
+        <item>HMI</item>
+        <item>HIC</item>
+        <item>HPS</item>
+    </string-array>
+
+
+</resources>

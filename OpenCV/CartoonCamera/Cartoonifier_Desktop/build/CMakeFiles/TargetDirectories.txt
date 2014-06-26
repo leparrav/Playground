@@ -1,0 +1,1 @@
+/home/luis/Documentos/Learn/OpenCV/CartoonCamera/Cartoonifier_Desktop/build/CMakeFiles/Cartoonifier_Desktop.dir
