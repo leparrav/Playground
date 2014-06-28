@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2014-06-26T18:44:22
+# Project created by QtCreator 2014-06-28T18:59:44
 #
 #-------------------------------------------------
 
@@ -10,9 +10,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Webcam
 TEMPLATE = app
-
-# OPENCV INCLUDE
 LIBS += `pkg-config opencv --libs`
+
 
 SOURCES += main.cpp\
         mainwindow.cpp

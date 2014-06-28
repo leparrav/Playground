@@ -551,7 +551,7 @@ moc_mainwindow.cpp: /home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QMainWindow 
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qicon.h \
 		../Webcam/mainwindow.h
-	/home/luis/Qt5.3.1/5.3/gcc_64/bin/moc $(DEFINES) -I/home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/linux-g++ -I/home/luis/Documentos/Learn/OpenCV/Test/Webcam/Webcam -I/home/luis/Qt5.3.1/5.3/gcc_64/include -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore -I. ../Webcam/mainwindow.h -o moc_mainwindow.cpp
+	/home/luis/Qt5.3.1/5.3/gcc_64/bin/moc $(DEFINES) -I/home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/linux-g++ -I/home/luis/Documentos/Learn/OpenCV/Webcam/Webcam -I/home/luis/Qt5.3.1/5.3/gcc_64/include -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore -I. ../Webcam/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -788,8 +788,7 @@ mainwindow.o: ../Webcam/mainwindow.cpp ../Webcam/mainwindow.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qtouchdevice.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h \
-		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QDebug
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Webcam/mainwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
