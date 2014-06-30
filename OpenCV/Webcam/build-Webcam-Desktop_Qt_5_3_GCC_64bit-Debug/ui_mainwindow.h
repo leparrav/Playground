@@ -33,6 +33,8 @@ public:
     QAction *actionHarris;
     QAction *actionSIFT;
     QAction *actionSURF;
+    QAction *actionStop;
+    QAction *actionClear_modifications;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QLabel *lvideoDisplay;
@@ -59,6 +61,10 @@ public:
         actionSIFT->setObjectName(QStringLiteral("actionSIFT"));
         actionSURF = new QAction(MainWindow);
         actionSURF->setObjectName(QStringLiteral("actionSURF"));
+        actionStop = new QAction(MainWindow);
+        actionStop->setObjectName(QStringLiteral("actionStop"));
+        actionClear_modifications = new QAction(MainWindow);
+        actionClear_modifications->setObjectName(QStringLiteral("actionClear_modifications"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -89,6 +95,8 @@ public:
         menuBar->addAction(menuFunctions->menuAction());
         menuBar->addAction(menuDescriptors->menuAction());
         menuCamera->addAction(actionStart);
+        menuCamera->addAction(actionStop);
+        menuCamera->addAction(actionClear_modifications);
         menuFunctions->addAction(actionCanny);
         menuFunctions->addAction(actionSobel);
         menuDescriptors->addAction(actionHarris);
@@ -102,13 +110,15 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Webcam OpenCV", 0));
         actionStart->setText(QApplication::translate("MainWindow", "Start", 0));
         actionCanny->setText(QApplication::translate("MainWindow", "Canny", 0));
         actionSobel->setText(QApplication::translate("MainWindow", "Sobel", 0));
         actionHarris->setText(QApplication::translate("MainWindow", "Harris", 0));
         actionSIFT->setText(QApplication::translate("MainWindow", "SIFT", 0));
         actionSURF->setText(QApplication::translate("MainWindow", "SURF", 0));
+        actionStop->setText(QApplication::translate("MainWindow", "Stop", 0));
+        actionClear_modifications->setText(QApplication::translate("MainWindow", "Clear", 0));
         lvideoDisplay->setText(QString());
         menuCamera->setTitle(QApplication::translate("MainWindow", "Camera", 0));
         menuFunctions->setTitle(QApplication::translate("MainWindow", "Edges", 0));

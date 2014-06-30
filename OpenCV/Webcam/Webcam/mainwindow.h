@@ -1,11 +1,8 @@
-/******************************************************************************
+/** \file mainwindow.h
  * Simple Qt Application that shows and Image in a QLabel
  * Created by: Luis Parra - 26/06/2014
  * PutImage Method from -> qt-opencv-multithreaded:  2012-2013 Nick D'Ademo
- *
- *
- *
- * ****************************************************************************/
+ */
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
@@ -14,6 +11,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QTimer>
+#include <QString>
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
@@ -35,10 +33,15 @@ class MainWindow : public QMainWindow{
         VideoCapture cap;
         bool camOpenResult;
         QTimer *timer;
+        int modify; // Private attribute that points how image should be modified.
 
         /** @brief Convert a OpenCV Mat Image to a QImage, it doesn't change original image
         */
         QImage putImage(const Mat& mat);
+
+        /** @brief This method gets a Frame and modifies it according to
+        */
+        Mat modifyImage(Mat& mat);
 
     private slots:
         /** @brief Slot to button start signal - connect to OpenCV Webcam
@@ -48,6 +51,8 @@ class MainWindow : public QMainWindow{
         /** @brief Slot for timer to update display from a given frame
         */
         void updateDisplay();
+        void on_actionCanny_triggered();
+        void on_actionClear_modifications_triggered();
 };
 
 #endif // MAINWINDOW_H

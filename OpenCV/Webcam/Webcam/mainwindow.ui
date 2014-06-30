@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Webcam OpenCV</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -38,6 +38,8 @@
      <string>Camera</string>
     </property>
     <addaction name="actionStart"/>
+    <addaction name="actionStop"/>
+    <addaction name="actionClear_modifications"/>
    </widget>
    <widget class="QMenu" name="menuFunctions">
     <property name="title">
@@ -94,6 +96,16 @@
   <action name="actionSURF">
    <property name="text">
     <string>SURF</string>
+   </property>
+  </action>
+  <action name="actionStop">
+   <property name="text">
+    <string>Stop</string>
+   </property>
+  </action>
+  <action name="actionClear_modifications">
+   <property name="text">
+    <string>Clear</string>
    </property>
   </action>
  </widget>

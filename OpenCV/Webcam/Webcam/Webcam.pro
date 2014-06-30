@@ -14,8 +14,15 @@ LIBS += `pkg-config opencv --libs`
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    thresholddialog.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    thresholddialog.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    thresholddialog.ui
+
+OTHER_FILES += \
+    LICENSE.txt \
+    README.md
