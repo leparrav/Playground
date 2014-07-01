@@ -35,6 +35,9 @@ public:
     QAction *actionSURF;
     QAction *actionStop;
     QAction *actionClear_modifications;
+    QAction *actionMorphological_Gradient;
+    QAction *actionScharr;
+    QAction *actionLaplace;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QLabel *lvideoDisplay;
@@ -65,6 +68,12 @@ public:
         actionStop->setObjectName(QStringLiteral("actionStop"));
         actionClear_modifications = new QAction(MainWindow);
         actionClear_modifications->setObjectName(QStringLiteral("actionClear_modifications"));
+        actionMorphological_Gradient = new QAction(MainWindow);
+        actionMorphological_Gradient->setObjectName(QStringLiteral("actionMorphological_Gradient"));
+        actionScharr = new QAction(MainWindow);
+        actionScharr->setObjectName(QStringLiteral("actionScharr"));
+        actionLaplace = new QAction(MainWindow);
+        actionLaplace->setObjectName(QStringLiteral("actionLaplace"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -99,6 +108,9 @@ public:
         menuCamera->addAction(actionClear_modifications);
         menuFunctions->addAction(actionCanny);
         menuFunctions->addAction(actionSobel);
+        menuFunctions->addAction(actionScharr);
+        menuFunctions->addAction(actionMorphological_Gradient);
+        menuFunctions->addAction(actionLaplace);
         menuDescriptors->addAction(actionHarris);
         menuDescriptors->addAction(actionSIFT);
         menuDescriptors->addAction(actionSURF);
@@ -119,6 +131,9 @@ public:
         actionSURF->setText(QApplication::translate("MainWindow", "SURF", 0));
         actionStop->setText(QApplication::translate("MainWindow", "Stop", 0));
         actionClear_modifications->setText(QApplication::translate("MainWindow", "Clear", 0));
+        actionMorphological_Gradient->setText(QApplication::translate("MainWindow", "Morphological Gradient", 0));
+        actionScharr->setText(QApplication::translate("MainWindow", "Scharr", 0));
+        actionLaplace->setText(QApplication::translate("MainWindow", "Laplace", 0));
         lvideoDisplay->setText(QString());
         menuCamera->setTitle(QApplication::translate("MainWindow", "Camera", 0));
         menuFunctions->setTitle(QApplication::translate("MainWindow", "Edges", 0));

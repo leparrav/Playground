@@ -47,13 +47,17 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../Webcam/main.cpp \
 		../Webcam/mainwindow.cpp \
-		../Webcam/thresholddialog.cpp moc_mainwindow.cpp \
-		moc_thresholddialog.cpp
+		../Webcam/thresholddialog.cpp \
+		../Webcam/imagemodifier.cpp moc_mainwindow.cpp \
+		moc_thresholddialog.cpp \
+		moc_imagemodifier.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		thresholddialog.o \
+		imagemodifier.o \
 		moc_mainwindow.o \
-		moc_thresholddialog.o
+		moc_thresholddialog.o \
+		moc_imagemodifier.o
 DIST          = /home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/common/shell-unix.conf \
 		/home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/common/unix.conf \
@@ -163,7 +167,8 @@ DIST          = /home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/features/lex.prf \
 		../Webcam/Webcam.pro ../Webcam/main.cpp \
 		../Webcam/mainwindow.cpp \
-		../Webcam/thresholddialog.cpp
+		../Webcam/thresholddialog.cpp \
+		../Webcam/imagemodifier.cpp
 QMAKE_TARGET  = Webcam
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = Webcam
@@ -426,7 +431,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/Webcam1.0.0 || mkdir -p .tmp/Webcam1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/Webcam1.0.0/ && $(COPY_FILE) --parents ../Webcam/mainwindow.h ../Webcam/thresholddialog.h .tmp/Webcam1.0.0/ && $(COPY_FILE) --parents ../Webcam/main.cpp ../Webcam/mainwindow.cpp ../Webcam/thresholddialog.cpp .tmp/Webcam1.0.0/ && $(COPY_FILE) --parents ../Webcam/mainwindow.ui ../Webcam/thresholddialog.ui .tmp/Webcam1.0.0/ && (cd `dirname .tmp/Webcam1.0.0` && $(TAR) Webcam1.0.0.tar Webcam1.0.0 && $(COMPRESS) Webcam1.0.0.tar) && $(MOVE) `dirname .tmp/Webcam1.0.0`/Webcam1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Webcam1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/Webcam1.0.0/ && $(COPY_FILE) --parents ../Webcam/mainwindow.h ../Webcam/thresholddialog.h ../Webcam/imagemodifier.h .tmp/Webcam1.0.0/ && $(COPY_FILE) --parents ../Webcam/main.cpp ../Webcam/mainwindow.cpp ../Webcam/thresholddialog.cpp ../Webcam/imagemodifier.cpp .tmp/Webcam1.0.0/ && $(COPY_FILE) --parents ../Webcam/mainwindow.ui ../Webcam/thresholddialog.ui .tmp/Webcam1.0.0/ && (cd `dirname .tmp/Webcam1.0.0` && $(TAR) Webcam1.0.0.tar Webcam1.0.0 && $(COMPRESS) Webcam1.0.0.tar) && $(MOVE) `dirname .tmp/Webcam1.0.0`/Webcam1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Webcam1.0.0
 
 
 clean:compiler_clean 
@@ -449,9 +454,9 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_thresholddialog.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_thresholddialog.cpp moc_imagemodifier.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_thresholddialog.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_thresholddialog.cpp moc_imagemodifier.cpp
 moc_mainwindow.cpp: /home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QMainWindow \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -563,6 +568,8 @@ moc_mainwindow.cpp: /home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QMainWindow 
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qtimer.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qbasictimer.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QString \
+		../Webcam/imagemodifier.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QObject \
 		../Webcam/mainwindow.h
 	/home/luis/Qt5.3.1/5.3/gcc_64/bin/moc $(DEFINES) -I/home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/linux-g++ -I/home/luis/Documentos/Learn/OpenCV/Webcam/Webcam -I/home/luis/Qt5.3.1/5.3/gcc_64/include -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore -I. ../Webcam/mainwindow.h -o moc_mainwindow.cpp
 
@@ -669,6 +676,58 @@ moc_thresholddialog.cpp: /home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QDialog
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qtouchdevice.h \
 		../Webcam/thresholddialog.h
 	/home/luis/Qt5.3.1/5.3/gcc_64/bin/moc $(DEFINES) -I/home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/linux-g++ -I/home/luis/Documentos/Learn/OpenCV/Webcam/Webcam -I/home/luis/Qt5.3.1/5.3/gcc_64/include -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore -I. ../Webcam/thresholddialog.h -o moc_thresholddialog.cpp
+
+moc_imagemodifier.cpp: /home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QObject \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qobject.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qnamespace.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qglobal.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qconfig.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qfeatures.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qtypetraits.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qsysinfo.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qlogging.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qflags.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_armv7.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_armv6.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_armv5.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_ia64.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_mips.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_x86.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_gcc.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_unix.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qmutex.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qnumeric.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qstring.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qchar.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qbytearray.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qrefcount.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qarraydata.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qlist.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qalgorithms.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qiterator.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qcoreevent.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qmetatype.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qisenum.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qobject_impl.h \
+		../Webcam/imagemodifier.h
+	/home/luis/Qt5.3.1/5.3/gcc_64/bin/moc $(DEFINES) -I/home/luis/Qt5.3.1/5.3/gcc_64/mkspecs/linux-g++ -I/home/luis/Documentos/Learn/OpenCV/Webcam/Webcam -I/home/luis/Qt5.3.1/5.3/gcc_64/include -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui -I/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore -I. ../Webcam/imagemodifier.h -o moc_imagemodifier.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -803,6 +862,8 @@ main.o: ../Webcam/main.cpp ../Webcam/mainwindow.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qtimer.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qbasictimer.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QString \
+		../Webcam/imagemodifier.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QObject \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QApplication \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qapplication.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qcoreapplication.h \
@@ -924,6 +985,8 @@ mainwindow.o: ../Webcam/mainwindow.cpp ../Webcam/mainwindow.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qtimer.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qbasictimer.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QString \
+		../Webcam/imagemodifier.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QObject \
 		ui_mainwindow.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QVariant \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QAction \
@@ -1073,14 +1136,116 @@ thresholddialog.o: ../Webcam/thresholddialog.cpp ../Webcam/thresholddialog.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qfiledevice.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qvector2d.h \
 		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_thresholddialog.h
+		ui_thresholddialog.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QVariant \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QAction \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qaction.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qicon.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QApplication \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qapplication.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qeventloop.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qguiapplication.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qinputmethod.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QButtonGroup \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QGridLayout \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qgridlayout.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qlayout.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QHeaderView \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qframe.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qvalidator.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qregularexpression.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qslider.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qstyle.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QLineEdit \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qlineedit.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qtextcursor.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qtextformat.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qpen.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtGui/qtextoption.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QPushButton \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o thresholddialog.o ../Webcam/thresholddialog.cpp
+
+imagemodifier.o: ../Webcam/imagemodifier.cpp ../Webcam/imagemodifier.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/QObject \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qobject.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qnamespace.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qglobal.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qconfig.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qfeatures.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qtypetraits.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qsysinfo.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qlogging.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qflags.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_armv7.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_armv6.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_armv5.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_ia64.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_mips.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_x86.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_gcc.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qatomic_unix.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qmutex.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qnumeric.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qstring.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qchar.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qbytearray.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qrefcount.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qarraydata.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qlist.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qalgorithms.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qiterator.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qcoreevent.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qmetatype.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qisenum.h \
+		/home/luis/Qt5.3.1/5.3/gcc_64/include/QtCore/qobject_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o imagemodifier.o ../Webcam/imagemodifier.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
 moc_thresholddialog.o: moc_thresholddialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_thresholddialog.o moc_thresholddialog.cpp
+
+moc_imagemodifier.o: moc_imagemodifier.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_imagemodifier.o moc_imagemodifier.cpp
 
 ####### Install
 

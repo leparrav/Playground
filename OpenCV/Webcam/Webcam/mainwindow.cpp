@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // Initiate variables
     camOpenResult = false;
     modify = 0;
-
+    imgMod = new ImageModifier();
     // Connect signals and slots
     connect(ui->actionStart,SIGNAL(triggered()),this, SLOT(connectToCamera()));
 }
@@ -64,22 +64,18 @@ void MainWindow::updateDisplay(){
 }
 
 Mat MainWindow::modifyImage(Mat& src){
-    Mat src_gray, detected_edges;
-    int kernel_size = 3;
-
-    /// Convert the image to grayscale
-    cvtColor( src, src_gray, CV_BGR2GRAY );
 
     switch(modify){
         case 1:
-        /// Canny detector
-        Canny( src_gray, detected_edges, 30, 120, kernel_size );
-        return detected_edges;
+            return imgMod->edgeCanny(src);
         case 2:
+            return imgMod->edgeSobel(src);
+        case 3:
+            return imgMod->edgeScharr(src);
         break;
     }
 
-    return src_gray;
+    return src;
 }
 
 
@@ -117,9 +113,25 @@ void MainWindow::on_actionCanny_triggered(){
         QMessageBox::warning(this,tr("Webcam"),tr("Clear image before changing it"),QMessageBox::Ok);
         return;
     }
-        modify = 1;
+        modify = 1; // 1 - For Canny
 }
 
 void MainWindow::on_actionClear_modifications_triggered(){
     modify = 0;
+}
+
+void MainWindow::on_actionSobel_triggered(){
+    if (modify != 0){
+        QMessageBox::warning(this,tr("Webcam"),tr("Clear image before changing it"),QMessageBox::Ok);
+        return;
+    }
+        modify = 2; // 2 - For Sobel
+}
+
+void MainWindow::on_actionScharr_triggered(){
+    if (modify != 0){
+        QMessageBox::warning(this,tr("Webcam"),tr("Clear image before changing it"),QMessageBox::Ok);
+        return;
+    }
+        modify = 3; // 3 - For Scharr
 }

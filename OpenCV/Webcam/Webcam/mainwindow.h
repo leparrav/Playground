@@ -15,6 +15,8 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
+#include "imagemodifier.h"
+
 using namespace cv;
 
 namespace Ui {
@@ -33,13 +35,15 @@ class MainWindow : public QMainWindow{
         VideoCapture cap;
         bool camOpenResult;
         QTimer *timer;
-        int modify; // Private attribute that points how image should be modified.
+        int modify; // Private attribute that tells how image should be modified.
+        ImageModifier *imgMod;
 
         /** @brief Convert a OpenCV Mat Image to a QImage, it doesn't change original image
         */
         QImage putImage(const Mat& mat);
 
-        /** @brief This method gets a Frame and modifies it according to
+        /** @brief This method gets a Frame and modifies it according to especified
+         *  @param mat Pointer to the current frame
         */
         Mat modifyImage(Mat& mat);
 
@@ -53,6 +57,8 @@ class MainWindow : public QMainWindow{
         void updateDisplay();
         void on_actionCanny_triggered();
         void on_actionClear_modifications_triggered();
+        void on_actionSobel_triggered();
+        void on_actionScharr_triggered();
 };
 
 #endif // MAINWINDOW_H

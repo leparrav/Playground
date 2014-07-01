@@ -47,6 +47,9 @@
     </property>
     <addaction name="actionCanny"/>
     <addaction name="actionSobel"/>
+    <addaction name="actionScharr"/>
+    <addaction name="actionMorphological_Gradient"/>
+    <addaction name="actionLaplace"/>
    </widget>
    <widget class="QMenu" name="menuDescriptors">
     <property name="title">
@@ -106,6 +109,21 @@
   <action name="actionClear_modifications">
    <property name="text">
     <string>Clear</string>
+   </property>
+  </action>
+  <action name="actionMorphological_Gradient">
+   <property name="text">
+    <string>Morphological Gradient</string>
+   </property>
+  </action>
+  <action name="actionScharr">
+   <property name="text">
+    <string>Scharr</string>
+   </property>
+  </action>
+  <action name="actionLaplace">
+   <property name="text">
+    <string>Laplace</string>
    </property>
   </action>
  </widget>
