@@ -59,6 +59,8 @@ class MainWindow : public QMainWindow{
         void on_actionClear_modifications_triggered();
         void on_actionSobel_triggered();
         void on_actionScharr_triggered();
+        void on_actionMorphological_Gradient_triggered();
+        void on_actionLaplace_triggered();
 };
 
 #endif // MAINWINDOW_H

@@ -72,6 +72,10 @@ Mat MainWindow::modifyImage(Mat& src){
             return imgMod->edgeSobel(src);
         case 3:
             return imgMod->edgeScharr(src);
+        case 4:
+            return imgMod->edgeMorph(src);
+        case 5:
+            return imgMod->edgeLaplace(src);
         break;
     }
 
@@ -109,11 +113,7 @@ QImage MainWindow::putImage(const Mat& mat){
 }
 
 void MainWindow::on_actionCanny_triggered(){
-    if (modify != 0){
-        QMessageBox::warning(this,tr("Webcam"),tr("Clear image before changing it"),QMessageBox::Ok);
-        return;
-    }
-        modify = 1; // 1 - For Canny
+    modify = 1; // 1 - For Canny
 }
 
 void MainWindow::on_actionClear_modifications_triggered(){
@@ -121,17 +121,17 @@ void MainWindow::on_actionClear_modifications_triggered(){
 }
 
 void MainWindow::on_actionSobel_triggered(){
-    if (modify != 0){
-        QMessageBox::warning(this,tr("Webcam"),tr("Clear image before changing it"),QMessageBox::Ok);
-        return;
-    }
-        modify = 2; // 2 - For Sobel
+    modify = 2; // 2 - For Sobel
 }
 
 void MainWindow::on_actionScharr_triggered(){
-    if (modify != 0){
-        QMessageBox::warning(this,tr("Webcam"),tr("Clear image before changing it"),QMessageBox::Ok);
-        return;
-    }
-        modify = 3; // 3 - For Scharr
+    modify = 3; // 3 - For Scharr
+}
+
+void MainWindow::on_actionMorphological_Gradient_triggered(){
+    modify = 4; // 4 - For Morphological gradient
+}
+
+void MainWindow::on_actionLaplace_triggered(){
+    modify = 5; // 5 - For Laplace
 }

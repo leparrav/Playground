@@ -1,3 +1,8 @@
+/** \file imagemodifier.h
+ *  @author Luis Parra
+ *  @brief This class handles all modifications done to a current frame
+ */
+
 #ifndef IMAGEMODIFIER_H
 #define IMAGEMODIFIER_H
 

@@ -1,5 +1,5 @@
     Webcam - OpenCV to use with Laptop webcam and modifies its properties
-    Copyright (C) <year>  <name of author>
+    Copyright (C) <2014>  <Luis Parra>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
