@@ -76,7 +76,10 @@ Mat MainWindow::modifyImage(Mat& src){
             return imgMod->edgeMorph(src);
         case 5:
             return imgMod->edgeLaplace(src);
-        break;
+        case 6:
+            return imgMod->corHarris(src);
+        case 7:
+            return imgMod->corShi(src);
     }
 
     return src;
@@ -134,4 +137,12 @@ void MainWindow::on_actionMorphological_Gradient_triggered(){
 
 void MainWindow::on_actionLaplace_triggered(){
     modify = 5; // 5 - For Laplace
+}
+
+void MainWindow::on_actionHarris_triggered(){
+     modify = 6; // 6 - For Harris Corner
+}
+
+void MainWindow::on_actionSIFT_triggered(){
+    modify = 7; // 7 - Shi - tomasi
 }

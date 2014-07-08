@@ -61,6 +61,8 @@ class MainWindow : public QMainWindow{
         void on_actionScharr_triggered();
         void on_actionMorphological_Gradient_triggered();
         void on_actionLaplace_triggered();
+        void on_actionHarris_triggered();
+        void on_actionSIFT_triggered();
 };
 
 #endif // MAINWINDOW_H

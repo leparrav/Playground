@@ -87,3 +87,79 @@ Mat ImageModifier::edgeSobel(Mat &src){
     addWeighted( abs_grad_x, 0.5, abs_grad_y, 0.5, 0, grad );
     return grad;
 }
+
+Mat ImageModifier::corHarris(Mat& src){
+    Mat dst, dst_norm, dst_norm_scaled, src_gray, output;
+    dst = Mat::zeros( src.size(), CV_32FC1 );
+
+    output = src.clone();
+
+    /// Convert the image to grayscale
+    cvtColor( src, src_gray, CV_BGR2GRAY );
+
+    /// Detector parameters
+    int blockSize = 2;
+    int apertureSize = 5;
+    double k = 0.01;
+    int thresh = 200;
+
+    /// Detecting corners
+    cornerHarris( src_gray, dst, blockSize, apertureSize, k, BORDER_DEFAULT );
+
+    /// Normalizing
+    normalize( dst, dst_norm, 0, 255, NORM_MINMAX, CV_32FC1, Mat() );
+    convertScaleAbs( dst_norm, dst_norm_scaled );
+
+    /// Drawing a circle around corners
+    for( int j = 0; j < dst_norm.rows ; j++ )
+       { for( int i = 0; i < dst_norm.cols; i++ )
+            {
+              if( (int) dst_norm.at<float>(j,i) > thresh )
+                {
+                 circle( output, Point( i, j ), 3,  Scalar(0,0,255), CV_FILLED, 8, 0 );
+                }
+            }
+       }
+    return output;
+}
+
+Mat ImageModifier::corShi(Mat& src){
+    Mat copy, src_gray;
+    int maxCorners = 20;
+
+    /// Parameters for Shi-Tomasi algorithm
+    vector<Point2f> corners;
+    double qualityLevel = 0.01;
+    double minDistance = 10;
+    int blockSize = 3;
+    bool useHarrisDetector = false;
+    double k = 0.04;
+
+    /// Convert the image to grayscale
+    cvtColor( src, src_gray, CV_BGR2GRAY );
+
+    /// Copy the source image
+
+    copy = src.clone();
+
+    /// Apply corner detection
+    goodFeaturesToTrack( src_gray,
+                 corners,
+                 maxCorners,
+                 qualityLevel,
+                 minDistance,
+                 Mat(),
+                 blockSize,
+                 useHarrisDetector,
+                 k );
+
+
+    /// Draw corners detected
+    //  cout<<"** Number of corners detected: "<<corners.size()<<endl;
+    int r = 2;
+    for( int i = 0; i < corners.size(); i++ )
+       { circle(copy, corners[i], r, Scalar(0,0,255), CV_FILLED, 8, 0 ); }
+
+    /// Show what you got
+    return copy;
+}

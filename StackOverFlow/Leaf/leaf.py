@@ -96,7 +96,7 @@ def largestContours(canny,img,img_gray):
 	return img_contour, contours, perimeter, hull
 
 '''
-Given a convex hull apply grabcut to the image
+Given a convex hull apply graph cut to the image
 Assumptions: 
 - Everything inside convex hull is the foreground object - cv2.GC_FGD or 1
 - Everything outside the rectangle is the background -  cv2.GC_BGD or 0
@@ -158,5 +158,5 @@ size = img.shape
 
 ## Show images
 images = [img_contour,img_grcut,canny_unfiltered,img_gray]
-titles = ["Largest Contours", "Grabcut", "Region grow", "Interactive"]
+titles = ["Largest Contours", "Graph cut", "Region grow", "Interactive"]
 showImages(images, titles)

@@ -25,6 +25,8 @@ public:
     Mat edgeSobel(Mat& src);
     Mat edgeScharr(Mat& src);
     Mat edgeMorph(Mat& src);
+    Mat corHarris(Mat& src);
+    Mat corShi(Mat& src);
 
 signals:
 

@@ -113,7 +113,6 @@ public:
         menuFunctions->addAction(actionLaplace);
         menuDescriptors->addAction(actionHarris);
         menuDescriptors->addAction(actionSIFT);
-        menuDescriptors->addAction(actionSURF);
 
         retranslateUi(MainWindow);
 
@@ -127,7 +126,7 @@ public:
         actionCanny->setText(QApplication::translate("MainWindow", "Canny", 0));
         actionSobel->setText(QApplication::translate("MainWindow", "Sobel", 0));
         actionHarris->setText(QApplication::translate("MainWindow", "Harris", 0));
-        actionSIFT->setText(QApplication::translate("MainWindow", "SIFT", 0));
+        actionSIFT->setText(QApplication::translate("MainWindow", "Shi-tomasi", 0));
         actionSURF->setText(QApplication::translate("MainWindow", "SURF", 0));
         actionStop->setText(QApplication::translate("MainWindow", "Stop", 0));
         actionClear_modifications->setText(QApplication::translate("MainWindow", "Clear", 0));
@@ -137,7 +136,7 @@ public:
         lvideoDisplay->setText(QString());
         menuCamera->setTitle(QApplication::translate("MainWindow", "Camera", 0));
         menuFunctions->setTitle(QApplication::translate("MainWindow", "Edges", 0));
-        menuDescriptors->setTitle(QApplication::translate("MainWindow", "Descriptors", 0));
+        menuDescriptors->setTitle(QApplication::translate("MainWindow", "Corners", 0));
     } // retranslateUi
 
 };

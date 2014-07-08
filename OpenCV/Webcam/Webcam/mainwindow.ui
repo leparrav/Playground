@@ -53,11 +53,10 @@
    </widget>
    <widget class="QMenu" name="menuDescriptors">
     <property name="title">
-     <string>Descriptors</string>
+     <string>Corners</string>
     </property>
     <addaction name="actionHarris"/>
     <addaction name="actionSIFT"/>
-    <addaction name="actionSURF"/>
    </widget>
    <addaction name="menuCamera"/>
    <addaction name="menuFunctions"/>
@@ -93,7 +92,7 @@
   </action>
   <action name="actionSIFT">
    <property name="text">
-    <string>SIFT</string>
+    <string>Shi-tomasi</string>
    </property>
   </action>
   <action name="actionSURF">
