@@ -5,7 +5,7 @@ it also allows for testing some filters in the images.
 
 ### Normal webcam
 
-<img src="Normal.jpg">
+<img src="Normal.png">
 
 ### Roadmap
 
