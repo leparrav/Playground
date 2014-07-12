@@ -14,8 +14,8 @@
    <string>Webcam OpenCV</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
      <widget class="QLabel" name="lvideoDisplay">
       <property name="text">
        <string/>
@@ -58,9 +58,26 @@
     <addaction name="actionHarris"/>
     <addaction name="actionSIFT"/>
    </widget>
+   <widget class="QMenu" name="menuDescriptors_2">
+    <property name="title">
+     <string>Descriptors</string>
+    </property>
+    <addaction name="actionSIFT_2"/>
+    <addaction name="actionSURFT"/>
+   </widget>
+   <widget class="QMenu" name="menuMotion">
+    <property name="title">
+     <string>Motion</string>
+    </property>
+    <addaction name="actionOptical_Flow"/>
+    <addaction name="actionBackground_substract"/>
+    <addaction name="actionFeature_matching"/>
+   </widget>
    <addaction name="menuCamera"/>
    <addaction name="menuFunctions"/>
    <addaction name="menuDescriptors"/>
+   <addaction name="menuDescriptors_2"/>
+   <addaction name="menuMotion"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -123,6 +140,31 @@
   <action name="actionLaplace">
    <property name="text">
     <string>Laplace</string>
+   </property>
+  </action>
+  <action name="actionSIFT_2">
+   <property name="text">
+    <string>SIFT</string>
+   </property>
+  </action>
+  <action name="actionSURFT">
+   <property name="text">
+    <string>SURF</string>
+   </property>
+  </action>
+  <action name="actionOptical_Flow">
+   <property name="text">
+    <string>Optical Flow</string>
+   </property>
+  </action>
+  <action name="actionBackground_substract">
+   <property name="text">
+    <string>Background substract</string>
+   </property>
+  </action>
+  <action name="actionFeature_matching">
+   <property name="text">
+    <string>Feature matching</string>
    </property>
   </action>
  </widget>

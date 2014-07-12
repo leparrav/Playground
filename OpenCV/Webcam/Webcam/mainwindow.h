@@ -16,6 +16,7 @@
 #include <opencv2/highgui/highgui.hpp>
 
 #include "imagemodifier.h"
+#include "thresholddialog.h"
 
 using namespace cv;
 
@@ -37,6 +38,7 @@ class MainWindow : public QMainWindow{
         QTimer *timer;
         int modify; // Private attribute that tells how image should be modified.
         ImageModifier *imgMod;
+        ThresholdDialog *thDialog;
 
         /** @brief Convert a OpenCV Mat Image to a QImage, it doesn't change original image
         */
@@ -63,6 +65,8 @@ class MainWindow : public QMainWindow{
         void on_actionLaplace_triggered();
         void on_actionHarris_triggered();
         void on_actionSIFT_triggered();
+        void on_actionSIFT_2_triggered();
+        void on_actionSURFT_triggered();
 };
 
 #endif // MAINWINDOW_H

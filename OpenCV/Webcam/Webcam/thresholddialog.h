@@ -14,6 +14,10 @@ class ThresholdDialog : public QDialog
 public:
     explicit ThresholdDialog(QWidget *parent = 0);
     ~ThresholdDialog();
+    int getMinSlider();
+    int getMaxSlider();
+    int getMaxCorners();
+    int getHessian();
 
 private:
     Ui::ThresholdDialog *ui;

@@ -13,13 +13,13 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -38,13 +38,20 @@ public:
     QAction *actionMorphological_Gradient;
     QAction *actionScharr;
     QAction *actionLaplace;
+    QAction *actionSIFT_2;
+    QAction *actionSURFT;
+    QAction *actionOptical_Flow;
+    QAction *actionBackground_substract;
+    QAction *actionFeature_matching;
     QWidget *centralWidget;
-    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout;
     QLabel *lvideoDisplay;
     QMenuBar *menuBar;
     QMenu *menuCamera;
     QMenu *menuFunctions;
     QMenu *menuDescriptors;
+    QMenu *menuDescriptors_2;
+    QMenu *menuMotion;
     QToolBar *mainToolBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -74,16 +81,26 @@ public:
         actionScharr->setObjectName(QStringLiteral("actionScharr"));
         actionLaplace = new QAction(MainWindow);
         actionLaplace->setObjectName(QStringLiteral("actionLaplace"));
+        actionSIFT_2 = new QAction(MainWindow);
+        actionSIFT_2->setObjectName(QStringLiteral("actionSIFT_2"));
+        actionSURFT = new QAction(MainWindow);
+        actionSURFT->setObjectName(QStringLiteral("actionSURFT"));
+        actionOptical_Flow = new QAction(MainWindow);
+        actionOptical_Flow->setObjectName(QStringLiteral("actionOptical_Flow"));
+        actionBackground_substract = new QAction(MainWindow);
+        actionBackground_substract->setObjectName(QStringLiteral("actionBackground_substract"));
+        actionFeature_matching = new QAction(MainWindow);
+        actionFeature_matching->setObjectName(QStringLiteral("actionFeature_matching"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        gridLayout = new QGridLayout(centralWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        verticalLayout = new QVBoxLayout(centralWidget);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         lvideoDisplay = new QLabel(centralWidget);
         lvideoDisplay->setObjectName(QStringLiteral("lvideoDisplay"));
 
-        gridLayout->addWidget(lvideoDisplay, 0, 0, 1, 1);
+        verticalLayout->addWidget(lvideoDisplay);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -95,6 +112,10 @@ public:
         menuFunctions->setObjectName(QStringLiteral("menuFunctions"));
         menuDescriptors = new QMenu(menuBar);
         menuDescriptors->setObjectName(QStringLiteral("menuDescriptors"));
+        menuDescriptors_2 = new QMenu(menuBar);
+        menuDescriptors_2->setObjectName(QStringLiteral("menuDescriptors_2"));
+        menuMotion = new QMenu(menuBar);
+        menuMotion->setObjectName(QStringLiteral("menuMotion"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -103,6 +124,8 @@ public:
         menuBar->addAction(menuCamera->menuAction());
         menuBar->addAction(menuFunctions->menuAction());
         menuBar->addAction(menuDescriptors->menuAction());
+        menuBar->addAction(menuDescriptors_2->menuAction());
+        menuBar->addAction(menuMotion->menuAction());
         menuCamera->addAction(actionStart);
         menuCamera->addAction(actionStop);
         menuCamera->addAction(actionClear_modifications);
@@ -113,6 +136,11 @@ public:
         menuFunctions->addAction(actionLaplace);
         menuDescriptors->addAction(actionHarris);
         menuDescriptors->addAction(actionSIFT);
+        menuDescriptors_2->addAction(actionSIFT_2);
+        menuDescriptors_2->addAction(actionSURFT);
+        menuMotion->addAction(actionOptical_Flow);
+        menuMotion->addAction(actionBackground_substract);
+        menuMotion->addAction(actionFeature_matching);
 
         retranslateUi(MainWindow);
 
@@ -133,10 +161,17 @@ public:
         actionMorphological_Gradient->setText(QApplication::translate("MainWindow", "Morphological Gradient", 0));
         actionScharr->setText(QApplication::translate("MainWindow", "Scharr", 0));
         actionLaplace->setText(QApplication::translate("MainWindow", "Laplace", 0));
+        actionSIFT_2->setText(QApplication::translate("MainWindow", "SIFT", 0));
+        actionSURFT->setText(QApplication::translate("MainWindow", "SURF", 0));
+        actionOptical_Flow->setText(QApplication::translate("MainWindow", "Optical Flow", 0));
+        actionBackground_substract->setText(QApplication::translate("MainWindow", "Background substract", 0));
+        actionFeature_matching->setText(QApplication::translate("MainWindow", "Feature matching", 0));
         lvideoDisplay->setText(QString());
         menuCamera->setTitle(QApplication::translate("MainWindow", "Camera", 0));
         menuFunctions->setTitle(QApplication::translate("MainWindow", "Edges", 0));
         menuDescriptors->setTitle(QApplication::translate("MainWindow", "Corners", 0));
+        menuDescriptors_2->setTitle(QApplication::translate("MainWindow", "Descriptors", 0));
+        menuMotion->setTitle(QApplication::translate("MainWindow", "Motion", 0));
     } // retranslateUi
 
 };

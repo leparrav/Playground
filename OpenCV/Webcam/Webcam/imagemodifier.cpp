@@ -5,24 +5,26 @@ ImageModifier::ImageModifier(QObject *parent) :
 
 }
 
-Mat ImageModifier::edgeCanny(Mat &src){
+Mat ImageModifier::edgeCanny(Mat &src, int sliderMin, int sliderMax){
     // Data Initialization for Canny
     Mat src_gray, canny_edges;
+    int minThr = ceil(sliderMin/100.0*255);
+    int maxThr = ceil(sliderMax/100.0*255);
     int kernel_size = 3;
 
     /// Convert the image to grayscale
     cvtColor( src, src_gray, CV_BGR2GRAY );
 
     /// Canny detector
-    Canny( src_gray, canny_edges, 30, 120, kernel_size );
+    Canny( src_gray, canny_edges, minThr, maxThr, kernel_size );
     return canny_edges;
 }
 
-Mat ImageModifier::edgeLaplace(Mat &src){
+Mat ImageModifier::edgeLaplace(Mat &src, int sliderMin, int sliderMax){
     Mat src_gray, dst;
     int kernel_size = 3;
-    int scale = 1;
-    int delta = 0;
+    int scale = ceil(sliderMin/100.0*8);
+    int delta = ceil(sliderMax/100.0*8);
     int ddepth = CV_8UC1;
 
     cvtColor( src, src_gray, CV_BGR2GRAY );     /// Convert the image to grayscale
@@ -40,13 +42,14 @@ Mat ImageModifier::edgeMorph(Mat &src){
     return result;
 }
 
-Mat ImageModifier::edgeScharr(Mat &src){
+Mat ImageModifier::edgeScharr(Mat &src, int sliderMin, int sliderMax){
     /// Data Initialization for Sobel and Scharr
     Mat grad_x, grad_y, grad,src_gray;
     Mat abs_grad_x, abs_grad_y;
-    int scale = 1;
-    int delta = 0;
     int ddepth = CV_16UC1;
+
+    int scale = ceil(sliderMin/100.0*8);
+    int delta = ceil(sliderMax/100.0*8);
 
     /// Convert the image to grayscale
     cvtColor( src, src_gray, CV_BGR2GRAY );
@@ -64,13 +67,16 @@ Mat ImageModifier::edgeScharr(Mat &src){
     return grad;
 }
 
-Mat ImageModifier::edgeSobel(Mat &src){
+Mat ImageModifier::edgeSobel(Mat &src, int sliderMin, int sliderMax){
     /// Data Initialization for Sobel and Scharr
     Mat grad_x, grad_y, grad,src_gray;
     Mat abs_grad_x, abs_grad_y;
-    int scale = 1;
-    int delta = 0;
+    //int scale = 1;
+   // int delta = 0;
     int ddepth = CV_16UC1;
+
+    int scale = ceil(sliderMin/100.0*8);
+    int delta = ceil(sliderMax/100.0*2);
 
     /// Convert the image to grayscale
     cvtColor( src, src_gray, CV_BGR2GRAY );
@@ -88,7 +94,7 @@ Mat ImageModifier::edgeSobel(Mat &src){
     return grad;
 }
 
-Mat ImageModifier::corHarris(Mat& src){
+Mat ImageModifier::corHarris(Mat& src, int maxCorners, int sliderMax){
     Mat dst, dst_norm, dst_norm_scaled, src_gray, output;
     dst = Mat::zeros( src.size(), CV_32FC1 );
 
@@ -101,7 +107,9 @@ Mat ImageModifier::corHarris(Mat& src){
     int blockSize = 2;
     int apertureSize = 5;
     double k = 0.01;
-    int thresh = 200;
+    int thresh = ceil(sliderMax/100.0*255);
+    int maxRow = 0;
+    int maxCol = 0;
 
     /// Detecting corners
     cornerHarris( src_gray, dst, blockSize, apertureSize, k, BORDER_DEFAULT );
@@ -110,9 +118,12 @@ Mat ImageModifier::corHarris(Mat& src){
     normalize( dst, dst_norm, 0, 255, NORM_MINMAX, CV_32FC1, Mat() );
     convertScaleAbs( dst_norm, dst_norm_scaled );
 
+    maxRow = ceil(maxCorners/100.0*dst_norm.rows);
+    maxCol = ceil(maxCorners/100.0*dst_norm.cols);
+
     /// Drawing a circle around corners
-    for( int j = 0; j < dst_norm.rows ; j++ )
-       { for( int i = 0; i < dst_norm.cols; i++ )
+    for( int j = 0; j < maxRow ; j++ )
+       { for( int i = 0; i < maxCol; i++ )
             {
               if( (int) dst_norm.at<float>(j,i) > thresh )
                 {
@@ -123,9 +134,8 @@ Mat ImageModifier::corHarris(Mat& src){
     return output;
 }
 
-Mat ImageModifier::corShi(Mat& src){
+Mat ImageModifier::corShi(Mat& src, int maxCorners){
     Mat copy, src_gray;
-    int maxCorners = 20;
 
     /// Parameters for Shi-Tomasi algorithm
     vector<Point2f> corners;
@@ -162,4 +172,34 @@ Mat ImageModifier::corShi(Mat& src){
 
     /// Show what you got
     return copy;
+}
+
+Mat ImageModifier::Sift(Mat& src, int sliderCorners){
+
+    SIFT sift(sliderCorners);   //number of keypoints
+
+    vector<cv::KeyPoint> key_points;
+
+    Mat descriptors, mascara;
+    Mat output_img;
+
+    sift(src,mascara,key_points,descriptors);
+    drawKeypoints(src, key_points, output_img);
+
+    return output_img;
+}
+
+Mat ImageModifier::doSurf(Mat& src, int sliderCorners){
+    SURF surf(sliderCorners);   //number of keypoints
+
+    vector<cv::KeyPoint> key_points;
+
+    Mat descriptors, mascara;
+    Mat output_img;
+
+    surf(src,mascara,key_points,descriptors);
+    drawKeypoints(src, key_points, output_img);
+
+    return output_img;
+
 }

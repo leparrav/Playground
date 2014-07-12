@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // Setup UI
     ui->setupUi(this);
 
+    // Threshold Dialog
+    thDialog = new ThresholdDialog();
+
     // Initiate variables
     camOpenResult = false;
     modify = 0;
@@ -20,6 +23,7 @@ MainWindow::~MainWindow(){
 }
 
 void MainWindow::connectToCamera(){
+    thDialog->show();
 
     // Suposse there is only one camera
     int deviceNumber = 0;
@@ -64,22 +68,30 @@ void MainWindow::updateDisplay(){
 }
 
 Mat MainWindow::modifyImage(Mat& src){
+    int sliderMin = thDialog->getMinSlider();
+    int sliderMax = thDialog->getMaxSlider();
+    int sliderCorner = thDialog->getMaxCorners();
+    int sliderHessian = thDialog->getHessian();
 
     switch(modify){
         case 1:
-            return imgMod->edgeCanny(src);
+            return imgMod->edgeCanny(src, sliderMin, sliderMax);
         case 2:
-            return imgMod->edgeSobel(src);
+            return imgMod->edgeSobel(src, sliderMin, sliderMax);
         case 3:
-            return imgMod->edgeScharr(src);
+            return imgMod->edgeScharr(src, sliderMin, sliderMax);
         case 4:
             return imgMod->edgeMorph(src);
         case 5:
-            return imgMod->edgeLaplace(src);
+            return imgMod->edgeLaplace(src, sliderMin, sliderMax);
         case 6:
-            return imgMod->corHarris(src);
+            return imgMod->corHarris(src, sliderCorner, sliderMax);
         case 7:
-            return imgMod->corShi(src);
+            return imgMod->corShi(src, sliderCorner);
+        case 8:
+            return imgMod->Sift(src, sliderCorner);
+        case 9:
+            return imgMod->doSurf(src,sliderHessian);
     }
 
     return src;
@@ -145,4 +157,13 @@ void MainWindow::on_actionHarris_triggered(){
 
 void MainWindow::on_actionSIFT_triggered(){
     modify = 7; // 7 - Shi - tomasi
+}
+
+void MainWindow::on_actionSIFT_2_triggered(){
+    modify = 8; // 8 - SIFT
+}
+
+void MainWindow::on_actionSURFT_triggered()
+{
+    modify = 9; // 9 - SURF
 }
