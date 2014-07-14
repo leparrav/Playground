@@ -15,16 +15,17 @@ This program was build with:
 
 * Qt 5.3.1
 * Opencv 2.4.9
+* In Ubuntu 14.04 - 64 bit
 
-## Modes
-
-## Edges
+## Screenshots - (Images may not be from the latest version)
 
 ### Normal webcam - Main window
 
 <img src="Webcam/Normal.png">
 
 ### Parameters window
+
+## Edges
 
 ### Canny
 
