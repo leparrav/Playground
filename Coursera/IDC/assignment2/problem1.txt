@@ -1,0 +1,39 @@
+SELECT count(*) FROM (
+  SELECT * FROM frequency
+  WHERE frequency.docid = "10398_txt_earn"
+);
+
+SELECT count(*) FROM (
+  SELECT term FROM frequency
+  WHERE frequency.docid = "10398_txt_earn" 
+  AND frequency.count = 1
+);
+
+SELECT count(*) FROM (
+  SELECT term FROM frequency
+  WHERE frequency.docid = "10398_txt_earn" 
+  AND frequency.count = 1
+  union
+  SELECT term FROM frequency
+  WHERE frequency.docid = "925_txt_trade" 
+  AND frequency.count = 1
+);
+
+SELECT count(*) FROM (
+  SELECT * FROM frequency
+  WHERE frequency.term = "parliament" 
+);
+
+SELECT count(docid) FROM (
+  SELECT * FROM frequency
+  GROUP BY frequency.docid
+  HAVING SUM(frequency.count) > 300
+);
+
+SELECT count(*) FROM (
+SELECT docid FROM frequency
+WHERE frequency.term = "transactions"
+INTERSECT
+SELECT docid FROM frequency
+WHERE frequency.term = "world"
+);

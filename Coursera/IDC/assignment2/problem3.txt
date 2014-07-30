@@ -1,0 +1,1 @@
+SELECT  a.docid,  1.0*sum(a.count) AS sum_count FROM frequency a WHERE a.term IN ('washington', 'taxes', 'treasury') GROUP BY a.docid ORDER BY sum_count desc limit 10

@@ -24,3 +24,4 @@ class MapReduce:
         jenc = json.JSONEncoder()
         for item in self.result:
             print jenc.encode(item)
+
