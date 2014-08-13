@@ -3,6 +3,12 @@
 Simple project that shows the webcam in a QLabel with the use of Qt libraries,
 it also allows for testing some filters in the images. 
 
+### Features
+
+* Edges 
+* Corners 
+* Descriptors 
+
 ### Roadmap - 12/07/2014
 
 * Add Transformations

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>528</width>
+    <height>348</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>528</width>
      <height>25</height>
     </rect>
    </property>
@@ -73,11 +73,20 @@
     <addaction name="actionBackground_substract"/>
     <addaction name="actionFeature_matching"/>
    </widget>
+   <widget class="QMenu" name="menuDetect">
+    <property name="title">
+     <string>Detect</string>
+    </property>
+    <addaction name="actionFace"/>
+    <addaction name="actionEyes"/>
+    <addaction name="actionObject"/>
+   </widget>
    <addaction name="menuCamera"/>
    <addaction name="menuFunctions"/>
    <addaction name="menuDescriptors"/>
    <addaction name="menuDescriptors_2"/>
    <addaction name="menuMotion"/>
+   <addaction name="menuDetect"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -165,6 +174,21 @@
   <action name="actionFeature_matching">
    <property name="text">
     <string>Feature matching</string>
+   </property>
+  </action>
+  <action name="actionFace">
+   <property name="text">
+    <string>Face</string>
+   </property>
+  </action>
+  <action name="actionEyes">
+   <property name="text">
+    <string>Eyes</string>
+   </property>
+  </action>
+  <action name="actionObject">
+   <property name="text">
+    <string>Object</string>
    </property>
   </action>
  </widget>

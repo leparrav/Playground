@@ -43,6 +43,9 @@ public:
     QAction *actionOptical_Flow;
     QAction *actionBackground_substract;
     QAction *actionFeature_matching;
+    QAction *actionFace;
+    QAction *actionEyes;
+    QAction *actionObject;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QLabel *lvideoDisplay;
@@ -52,13 +55,14 @@ public:
     QMenu *menuDescriptors;
     QMenu *menuDescriptors_2;
     QMenu *menuMotion;
+    QMenu *menuDetect;
     QToolBar *mainToolBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(400, 300);
+        MainWindow->resize(528, 348);
         actionStart = new QAction(MainWindow);
         actionStart->setObjectName(QStringLiteral("actionStart"));
         actionCanny = new QAction(MainWindow);
@@ -91,6 +95,12 @@ public:
         actionBackground_substract->setObjectName(QStringLiteral("actionBackground_substract"));
         actionFeature_matching = new QAction(MainWindow);
         actionFeature_matching->setObjectName(QStringLiteral("actionFeature_matching"));
+        actionFace = new QAction(MainWindow);
+        actionFace->setObjectName(QStringLiteral("actionFace"));
+        actionEyes = new QAction(MainWindow);
+        actionEyes->setObjectName(QStringLiteral("actionEyes"));
+        actionObject = new QAction(MainWindow);
+        actionObject->setObjectName(QStringLiteral("actionObject"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -105,7 +115,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 400, 25));
+        menuBar->setGeometry(QRect(0, 0, 528, 25));
         menuCamera = new QMenu(menuBar);
         menuCamera->setObjectName(QStringLiteral("menuCamera"));
         menuFunctions = new QMenu(menuBar);
@@ -116,6 +126,8 @@ public:
         menuDescriptors_2->setObjectName(QStringLiteral("menuDescriptors_2"));
         menuMotion = new QMenu(menuBar);
         menuMotion->setObjectName(QStringLiteral("menuMotion"));
+        menuDetect = new QMenu(menuBar);
+        menuDetect->setObjectName(QStringLiteral("menuDetect"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -126,6 +138,7 @@ public:
         menuBar->addAction(menuDescriptors->menuAction());
         menuBar->addAction(menuDescriptors_2->menuAction());
         menuBar->addAction(menuMotion->menuAction());
+        menuBar->addAction(menuDetect->menuAction());
         menuCamera->addAction(actionStart);
         menuCamera->addAction(actionStop);
         menuCamera->addAction(actionClear_modifications);
@@ -141,6 +154,9 @@ public:
         menuMotion->addAction(actionOptical_Flow);
         menuMotion->addAction(actionBackground_substract);
         menuMotion->addAction(actionFeature_matching);
+        menuDetect->addAction(actionFace);
+        menuDetect->addAction(actionEyes);
+        menuDetect->addAction(actionObject);
 
         retranslateUi(MainWindow);
 
@@ -166,12 +182,16 @@ public:
         actionOptical_Flow->setText(QApplication::translate("MainWindow", "Optical Flow", 0));
         actionBackground_substract->setText(QApplication::translate("MainWindow", "Background substract", 0));
         actionFeature_matching->setText(QApplication::translate("MainWindow", "Feature matching", 0));
+        actionFace->setText(QApplication::translate("MainWindow", "Face", 0));
+        actionEyes->setText(QApplication::translate("MainWindow", "Eyes", 0));
+        actionObject->setText(QApplication::translate("MainWindow", "Object", 0));
         lvideoDisplay->setText(QString());
         menuCamera->setTitle(QApplication::translate("MainWindow", "Camera", 0));
         menuFunctions->setTitle(QApplication::translate("MainWindow", "Edges", 0));
         menuDescriptors->setTitle(QApplication::translate("MainWindow", "Corners", 0));
         menuDescriptors_2->setTitle(QApplication::translate("MainWindow", "Descriptors", 0));
         menuMotion->setTitle(QApplication::translate("MainWindow", "Motion", 0));
+        menuDetect->setTitle(QApplication::translate("MainWindow", "Detect", 0));
     } // retranslateUi
 
 };
