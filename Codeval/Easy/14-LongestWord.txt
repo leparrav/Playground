@@ -1,0 +1,4 @@
+some line with text
+another line
+same line with another text
+test cases are hard to come by!

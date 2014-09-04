@@ -1,0 +1,31 @@
+@font-face {
+    font-family: 'helvetica_lightregular';
+    src: url('fonts/helvetica-light-webfont.eot');
+    src: url('fonts/helvetica-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/helvetica-light-webfont.woff') format('woff'),
+         url('helvetica-light-webfont.ttf') format('truetype'),
+         url('fonts/helvetica-light-webfont.svg#helvetica_lightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'exo';
+    src: url('fonts/exo2.0-regular-webfont.eot');
+    src: url('fonts/exo2.0-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/exo2.0-regular-webfont.woff') format('woff'),
+    url('fonts/exo2.0-regular-webfont.ttf') format('truetype'),
+    url('fonts/exo2.0-regular-webfont.svg#exo_2.0regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'angelinaregular';
+    src: url('fonts/angelina-webfont.eot');
+    src: url('fonts/angelina-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/angelina-webfont.woff') format('woff'),
+    url('fonts/angelina-webfont.ttf') format('truetype'),
+    url('fonts/angelina-webfont.svg#angelinaregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
