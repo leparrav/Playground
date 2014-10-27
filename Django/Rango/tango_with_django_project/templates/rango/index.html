@@ -1,36 +1,29 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Rango</title>
-    </head>
+{% extends 'rango/base.html' %}
+{% block body_block %}
+<div class="hero-unit">
+    <h1>Ready to Rango</h1>
+    <p>Find, Add, Share and Rango useful links and resources.</p>
+</div>
 
-    <body>
-        <h1>Rango says..hello world!</h1>
+<div class="row-fluid">
+    <div class="span6">
 
-        {% if categories %}
-            <ul>
-                {% for category in categories %}
-                <!-- Following line changed to add an HTML hyperlink -->
-                <li><a href="/rango/category/{{ category.url }}">{{ category.name }}</a></li>
-                {% endfor %}
-            </ul>
-
-       {% else %}
-            <strong>There are no categories present.</strong>
-       {% endif %}
-
-    {% if pages %}
-      <h1> Top 5 viewed Pages </h1>
+    </div>
+    <!--/span-->
+    <div class="span6">
+        <h2>Top Five Pages</h2>
+        {% if pages %}
         <ul>
             {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            <li><a href="{{ page.url}}">{{ page.title }}</a> - {{ page.category }} ({{ page.views }} view(s))</li>
             {% endfor %}
         </ul>
-    {% else %}
-        <strong> There are no favorites pages or no pages at all (ERROR) </strong>
-    {% endif %}
+        {% else %}
+        <strong>No pages at present.</strong>
+        {% endif %}
 
-    <a href="/rango/add_category/">Add a New Category</a>
-
-    </body>
-</html>
+    </div>
+    <!--/span-->
+</div>
+<!--/row-->
+{% endblock %}

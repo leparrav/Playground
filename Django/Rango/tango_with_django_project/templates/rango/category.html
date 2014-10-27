@@ -1,34 +1,41 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Rango</title>
-    </head>
+{% extends 'rango/base.html' %}
 
-    <body>
-        <h1>{{ category_name }}</h1>
-        {% if category %}
+{% block title %}{{ category_name }}{% endblock %}
 
+{% block body_block %}
+    <h1>{{ category_name }}</h1>
 
+    {% if pages %}
+    <ul>
+        {% for page in pages %}
+        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <strong>No pages currently in category.</strong>
+    {% endif %}
 
-            {% if pages %}
-            <ul>
-                {% for page in pages %}
-                <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <strong>No pages currently in category.</strong>
-            {% endif %}
-
-            <a href="add_page/"> Add new page </a>
-
-        {% else %}
-            <p> The specified category {{ category_name }} does not exist!,
-                Would you like to add it? </p>
-            <a href="/rango/add_category/">Add a New Category</a>
-
+    {% if user.is_authenticated %}
+        <form class="form-signin span8" id="user_form" method="post" action="/rango/category/{{category_name_url}}/">
+            {% csrf_token %}
+            <!-- Display the search form elements here -->
+            <input type="text" size="50" name="query" value="" id="query" />
+            <input class="btn btn-primary" type="submit" name="submit" value="Search" />
+            <br />
+        </form>
+        {% if result_list %}
+        <div style="clear: both;">
+            <ol>
+            {% for result in result_list %}
+                <li>
+                <strong><a href="{{ result.link }}">{{ result.title }}</a></strong><br />
+                <em>{{ result.summary }}</em>
+                </li>
+            {% endfor %}
+            </ol>
+        </div>
         {% endif %}
 
-      
-    </body>
-</html>
+       <a href="/rango/category/{{category_name_url}}/add_page/">Add a Page</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'portafolio/base.html' %}
+{% load static %}	
+
+
+<!-- Header - Navbar -->
+{% block navbar %}
+	<li><a href="/portafolio/"> Homepage </a></li>
+	<li><a href="/portafolio/courses"> My Courses </a></li>
+{% endblock %}
+
+
+
+{% block body_block %}
+	{% if jobs_list %}
+		{% for job in jobs_list %}
+		<div class="course_info">
+			<div class="left_course">
+				<a href= {{ job.company_url }} ><h3> {{job.role}}</h3></a>
+				<h4> {{job.company_name}} - {{job.location}}</h4>
+				<h6> From {{job.start_date}} to {{job.end_date}} </h6>
+				<p> {{job.description}} </p>
+			</div>
+			<div>
+				<img src="{{ job.pic1.url }}" height="225" width="350" /></a>
+			</div>
+		</div>
+		{% endfor %}
+	{% else %} Dp
+		<p> There are no jobs_list in the database </p>
+	{% endif %}
+{% endblock %}

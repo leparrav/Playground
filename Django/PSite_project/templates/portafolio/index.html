@@ -1,141 +1,101 @@
-<!DOCTYPE HTML>
+{% extends 'portafolio/base.html' %}	
+{% load static %}	
+{% load app_filters %}
 
-{% load static %}
+{% block navbar %}
+	<li><a href="#intro"> Intro </a></li>
+	<li><a href="#one"> What I do </a></li>
+	<li><a href="#two"> Who I am </a></li>
+	<li><a href="#work"> My Work </a></li>
+	<li><a href="courses/"> My Courses </a></li>
+	<li><a href="projects/"> Personal Projects </a></li>
+{% endblock %}
 
-<html>
-	<head>
-		<title>Robotics, Computer Vision and a little of Web Development</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="" />
-		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-		<script src="{% static "js/jquery.min.js" %}"></script>
-		<script src="{% static "js/jquery.poptrox.min.js" %}"></script>
-		<script src="{% static "js/jquery.scrolly.min.js" %}"></script>
-		<script src="{% static "js/jquery.scrollgress.min.js" %}"></script>
-		<script src="{% static "js/skel.min.js" %}" ></script>
-		<script src="{% static "js/init.js" %}"></script>
-		<noscript>
-			<link rel="stylesheet" href="{% static "css/skel.css" %}" />
-			<link rel="stylesheet" href="{% static "css/style.css" %}" />
-			<link rel="stylesheet" href="{% static "css/style-wide.css" %}" />
-			<link rel="stylesheet" href="{% static "css/style-normal.css" %}" />
-		</noscript>
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-	</head>
-	<body>
+{% block body_block %}
+<!-- Intro -->
+	<section id="intro" class="main style1 dark fullscreen">
+		<div class="content container small">
+			<header>
+				<h2>Hi there!</h2>
+			</header>
+			<p>Welcome to  my <strong>portafolio</strong> website. It was built with SkelJS for visuals and responsive over Django with Zinia blog app. Here you will find several examples of previous and current works and personal projects on Robotics, Web development and Computer Vision. I hope you enjoy it</p>
+			<footer>
+				<a href="#one" class="button style2 down">More</a>
+			</footer>
+		</div>
+	</section>
 
-		<!-- Header -->
-			<header id="header">
+<!-- One -->
+	<section id="one" class="main style2 right dark fullscreen">
+		<div class="content box style2">
+			<header>
+				<h2>What I Do</h2>
+			</header>
+			<p>I work with advanced algorithms for design and deployment in robotics and computer vision industry, deep learning networks, fuzzy controllers, probabilistic graphical models.</p>
+		</div>
+		<a href="#two" class="button style2 down anchored">Next</a>
+	</section>
 
-				<!-- Logo -->
-					<h1 id="logo">Luis Parra</h1>
-				
-				<!-- Nav -->
-					<nav id="nav">
-						<ul>
-							<li><a href="#intro">Intro</a></li>
-							<li><a href="#one">What I Do</a></li>
-							<li><a href="#two">Who I Am</a></li>
-							<li><a href="#work">My Work</a></li>
-							<li><a href="#blog">Blog</a></li>
-							<li><a href="#contact">Contact</a></li>
-						</ul>
-					</nav>
-
+<!-- Two -->
+	<section id="two" class="main style2 left dark fullscreen">
+		<div class="content box style2">
+			<header>
+				<h2>Who I Am</h2>
+			</header>
+			<p>I'm an Electrical engineer with a Master in Automation and Robotics, with over 2+ years of expertise in these fields. I'm also very passionate about learning and a <strong> big </strong> fan of MOOC courses</p>
+		</div>
+		<a href="#work" class="button style2 down anchored">Next</a>
+	</section>
+	
+<!-- Work -->
+<!-- TODO: Change Gallery to use automatic / random jobs from the db from the last two rows  -->
+	<section id="work" class="main style3 primary">
+		<div class="content container">
+			<header>
+				<a href="{% static "cv.pdf" %}"><h2>My Work</h2></a>
+				<p>
+					Ahead you can find a random sample of my works or personal projects, full list can be found <a href="jobs/">here</a>, If you would like to see more info about a given job in the image gallery, right click its link into a new tab or window.
+				</p>
 			</header>
 			
-		<!-- Intro -->
-			<section id="intro" class="main style1 dark fullscreen">
-				<div class="content container small">
-					<header>
-						<h2>Hi there!</h2>
-					</header>
-					<p>Welcome to  my <strong>portafolio</strong> website, this as a place where I can express myself. It was built with SkelJS and Django for the blog app. There are several examples of previous and current works on Robotics, Web development and Computer Vision. I hope you enjoy it</p>
-					<footer>
-						<a href="#one" class="button style2 down">More</a>
-					</footer>
-				</div>
-			</section>
-		
-		<!-- One -->
-			<section id="one" class="main style2 right dark fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>What I Do</h2>
-					</header>
-					<p>I work with advanced algorithms for design and deployment in robotics and computer vision industry, deep learning networks, fuzzy controllers, probabilistic graphical models.</p>
-				</div>
-				<a href="#two" class="button style2 down anchored">Next</a>
-			</section>
-		
-		<!-- Two -->
-			<section id="two" class="main style2 left dark fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>Who I Am</h2>
-					</header>
-					<p>I'm an Electrical engineer with a Master in Automation and Robotics, with over 2+ years of expertise in these fields. I'm also very passionate about learning and a <strong> big </strong> fan of MOOC courses</p>
-				</div>
-				<a href="#work" class="button style2 down anchored">Next</a>
-			</section>
-			
-		<!-- Work -->
-			<section id="work" class="main style3 primary">
-				<div class="content container">
-					<header>
-						<h2>My Work</h2>
-						<p>Ahead you can find some of my most recents or important works, full list can be found here, Also CV can be downloaded from here</p>
-					</header>
-					
-					<!-- Lightbox Gallery  -->
-						<div class="container small gallery">
-							<div class="row flush images">
-								<div class="6u"><a href="{% static "images/fulls/01.jpg" %}" class="image fit from-left"><img src="{% static "images/thumbs/01.jpg" %}" title="The Anonymous Red" alt="" /></a></div>
-								<div class="6u"><a href={% static "images/fulls/02.jpg" %} class="image fit from-right"><img src="{% static "images/thumbs/02.jpg" %}" title="Airchitecture II" alt="" /></a></div>
-							</div>
-							<div class="row flush images">
-								<div class="6u"><a href="{% static "images/fulls/03.jpg" %}" class="image fit from-left"><img src="{% static "images/thumbs/03.jpg" %}" title="Air Lounge" alt="" /></a></div>
-								<div class="6u"><a href="{% static "images/fulls/04.jpg" %}" class="image fit from-right"><img src="{% static "images/thumbs/04.jpg" %}" title="Carry on" alt="" /></a></div>
-							</div>
-							<div class="row flush images">
-								<div class="6u"><a href="images/fulls/05.jpg" class="image fit from-left"><img src="images/thumbs/05.jpg" title="The sparkling shell" alt="" /></a></div>
-								<div class="6u"><a href="images/fulls/06.jpg" class="image fit from-right"><img src="images/thumbs/06.jpg" title="Bent IX" alt="" /></a></div>
-							</div>
+			<!-- Lightbox Gallery - First row is fixed for me atleast  -->
+				<div class="container small gallery">
+					<div class="row flush images">
+						<div class="6u">
+							<a href="{% static "images/fulls/01.png" %}" class="image fit from-left">
+								<img src="{% static "images/thumbs/01.png" %}" title="&lt;a href=&quot;courses/&quot; &gt;Continuous Development&lt;/a&gt;" alt=""  height="300" width="500" /></a>
 						</div>
 
-				</div>
-			</section>
-			
-		<!-- Contact -->
-			<section id="contact" class="main style3 secondary">
-				<div class="content container">
-					<header>
-						<h2>Say Hello.</h2>
-						<p>Lorem ipsum dolor sit amet et sapien sed elementum egestas dolore condimentum.</p>
-					</header>
-				</div>
-			</section>
-			
-		<!-- Footer -->
-			<footer id="footer">
+						<div class="6u">
+							<a href="{% static "images/fulls/02.jpg" %}" class="image fit from-right">
+								<img src="{% static "images/thumbs/02.jpg" %}" title="&lt;a href=&quot;/master/&quot; target=&quot;_blank&quot;&gt;Master in Automation and Robotics&lt;/a&gt;" alt=""  height="300" width="500" /></a>
+						</div>
+					</div>
 
-				<!-- Icons -->
-					<ul class="actions">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
-						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-					</ul>
-
-				<!-- Menu -->
-					<ul class="menu">
-						<li>&copy; LEPV</li>
-					</ul>
-			
-			</footer>
-
-	</body>
-</html>
+					{% if jobs %}
+						{%for job1, job2 in jobs %}
+							<div class="row flush images">
+									<div class="6u">
+											<a href="{{ job1.pic1.url }}" class="image fit from-left">
+											<img src="{{ job1.pic1.url }}"  title="&lt;a href=&quot;/{{ jobs_urls|get_item:job1.company_name }}/{{ jobs_urls|get_item:job1.role }}&quot; target=&quot;_blank&quot;&gt;{{job1.role}}&lt;/a&gt;" alt="" height="300" width="500" /></a>
+									</div>
+									<div class="6u">
+											<a href="{{ job2.pic3.url }}" class="image fit from-right">
+											<img src="{{ job2.pic3.url }}"  title="&lt;a href=&quot;/{{ jobs_urls|get_item:job2.company_name }}/{{ jobs_urls|get_item:job2.role }}&quot; target=&quot;_blank&quot;&gt;{{job2.role}}&lt;/a&gt;" alt="" height="300" width="500" /></a>
+									</div>
+							</div>
+						{% endfor %}
+					{% endif %}
+		</div>
+	</section>
+	
+<!-- Contact -->
+	<section id="contact" class="main style3 secondary">
+		<div class="content container">
+			<header>
+				<h2>Say Hello.</h2>
+				<p>If you would like to contact me please, do so over my linkedin account or email</p>
+			</header>
+		</div>
+	</section>
+{% endblock %}

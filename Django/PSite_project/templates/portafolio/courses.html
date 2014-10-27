@@ -1,0 +1,30 @@
+{% extends 'portafolio/base.html' %}
+{% load static %}	
+
+
+<!-- Header - Navbar -->
+{% block navbar %}
+	<li><a href="/portafolio/"> Homepage </a></li>
+	<li><a href="/portafolio/jobs"> My Work </a></li>
+{% endblock %}
+
+
+
+{% block body_block %}
+	{% if courses %}
+		{% for course in courses %}
+		<div class="course_info">
+			<div class="left_course">
+				<a href={{course.course_url}}><h3> {{course.name}}</h3></a>
+				<h6> {{course.institution}} finished: {{course.end_date}} </h6>
+				<p> {{course.description}} </p>
+			</div>
+			<div>
+				<img src="{{ course.pic1.url }}" height="225" width="350" /></a>
+			</div>
+		</div>
+		{% endfor %}
+	{% else %} Dp
+		<p> There are no courses in the database </p>
+	{% endif %}
+{% endblock %}

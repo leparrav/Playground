@@ -730,7 +730,7 @@
 /*********************************************************************************/
 
 	#two {
-		background: url('images/overlay.png'), url('../images/two.jpg');
+		background: url('images/overlay.png'), url('../images/two.png');
 		background-size: 256px 256px, cover;
 		background-attachment: fixed, fixed;
 		background-position: top left, center center;
@@ -834,6 +834,7 @@
 		color: #999;
 		color: rgba(185,186,187,0.5);
 		overflow: hidden;
+		clear: both;
 	}
 
 		#footer a {
@@ -1043,3 +1044,35 @@
 			body.touch .poptrox-popup .closer {
 				opacity: 1.0 !important;
 			}
+
+/*********************************************************************************/
+/* Courses                                                                   */
+/*********************************************************************************/
+
+	.course_info{
+	  	width:1200px;
+		margin:0 auto;
+		top: 200px;
+	}
+
+	.left_course {
+	 	text-align: justify;
+	   	float:left;
+	   	width:700px;
+	}
+
+	.course_info p{
+		font-size: 12pt;
+	}
+
+	.course_info img {
+		position: relative;
+		top: 100px;
+		left:100px;
+	}
+
+	.right_course {
+	   	float:right;
+	   	width:600px;
+	   	background-color: black;
+	}
