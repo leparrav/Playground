@@ -26,6 +26,7 @@
                        <ul class="nav pull-right">
                            {% if user.is_authenticated %}
                             <li class="navbar-text">Welcome, {{ user.username }}!</li>
+                            <li><a href="/rango/profile/"> Profile </a></li>
                             <li><a href="/rango/logout/">Logout</a></li>
                            {% else %}
                             <li><a href="/rango/register/">Register</a></li>
@@ -50,9 +51,19 @@
             <div class="row-fluid">
                 <div class="span3">
                     <div class="well sidebar-nav">
-                      {% if categories %} 
-                        {% include "rango/category_list.html" %}
-                      {% endif %}
+                      <ul class="nav nav-list">
+                        <li class="nav-header">Find a Category</li>
+                        <form>
+                          <label></label>
+                          <li><input  class="search-query span10" type="text" name="suggestion" value="" id="suggestion" /></li>
+                        </form>
+                      </ul>
+                      {% if categories %}
+                     <div id="cats">
+                       {% include 'rango/category_list.html' with categories=categories %}
+                     </div>
+                    {% endif %}
+
                     </div>
                     <!--/.well -->
                 </div>
@@ -74,8 +85,9 @@
             <p>&copy; Rango: How to Tango with Django 2013</p>
         </div>
     </footer>
-    
-    <script src="{% static 'js/jquery-2.0.3.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+      <script src="{% static "js/jquery-2.1.1.min.js" %}"></script>
+      <script src="{% static 'js/bootstrap.min.js' %}"></script>
+      <script src="{% static "js/rango-ajax.js" %}"></script>
     </body>
 </html>

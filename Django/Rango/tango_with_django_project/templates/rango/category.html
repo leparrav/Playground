@@ -5,15 +5,17 @@
 {% block body_block %}
     <h1>{{ category_name }}</h1>
 
-    {% if pages %}
-    <ul>
-        {% for page in pages %}
-        <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <strong>No pages currently in category.</strong>
+    <p>
+
+    <b id="like_count">{{ category.likes }}</b> people like this category
+
+    {% if user.is_authenticated %}
+        <button id ="likes" data-catid="{{category.id}}" class="btn btn-mini btn-primary" type="button">Like</button>
     {% endif %}
+
+    </p>
+
+   {% include 'rango/pages_list.html' %}
 
     {% if user.is_authenticated %}
         <form class="form-signin span8" id="user_form" method="post" action="/rango/category/{{category_name_url}}/">
@@ -23,19 +25,19 @@
             <input class="btn btn-primary" type="submit" name="submit" value="Search" />
             <br />
         </form>
-        {% if result_list %}
-        <div style="clear: both;">
-            <ol>
-            {% for result in result_list %}
-                <li>
-                <strong><a href="{{ result.link }}">{{ result.title }}</a></strong><br />
-                <em>{{ result.summary }}</em>
-                </li>
-            {% endfor %}
-            </ol>
-        </div>
-        {% endif %}
-
-       <a href="/rango/category/{{category_name_url}}/add_page/">Add a Page</a>
+    {% if result_list %}
+    <div style="clear: both;">
+        <ol>
+        {% for result in result_list %}
+            <li>
+            <strong><a href="{{ result.link }}">{{ result.title }}</a></strong> 
+            <button data-catid="{{category.id}}" data-title="{{ result.title }}" data-url="{{ result.link }}" class="rango-add btn btn-mini btn-info" type="button">Add this page</button>
+            <br />
+            <em>{{ result.summary }}</em>
+            </li>
+        {% endfor %}
+        </ol>
+    </div>
+    {% endif %}
     {% endif %}
 {% endblock %}
