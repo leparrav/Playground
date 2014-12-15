@@ -2,7 +2,6 @@
 
 ImageModifier::ImageModifier(QObject *parent) :
     QObject(parent){
-
 }
 
 Mat ImageModifier::edgeCanny(Mat &src, int sliderMin, int sliderMax){
@@ -167,8 +166,8 @@ Mat ImageModifier::corShi(Mat& src, int maxCorners){
     /// Draw corners detected
     //  cout<<"** Number of corners detected: "<<corners.size()<<endl;
     int r = 2;
-    for( int i = 0; i < corners.size(); i++ )
-       { circle(copy, corners[i], r, Scalar(0,0,255), CV_FILLED, 8, 0 ); }
+    for( uint i = 0; i < corners.size(); i++ ){
+        circle(copy, corners[i], r, Scalar(0,0,255), CV_FILLED, 8, 0 ); }
 
     /// Show what you got
     return copy;
@@ -202,4 +201,103 @@ Mat ImageModifier::doSurf(Mat& src, int sliderCorners){
 
     return output_img;
 
+}
+
+
+Mat ImageModifier::doOPTK(Mat &src, int maxCorners){
+    maxCorners += 400; //range is from 401 to 501
+    int cornersThreshold = 400;
+    if (previousImage.empty()) {
+            Mat src_gray;
+            previousImage = src.clone();
+            /// Parameters for Shi-Tomasi algorithm
+            double qualityLevel = 0.01;
+            double minDistance = 5;
+            int blockSize = 3;
+            bool useHarrisDetector = false;
+            double k = 0.04;
+            /// Convert the image to grayscale
+            cvtColor( previousImage, src_gray, CV_BGR2GRAY );
+            /// Apply corner detection
+            goodFeaturesToTrack( src_gray,
+                         optkPoints,
+                         maxCorners,
+                         qualityLevel,
+                         minDistance,
+                         Mat(),
+                         blockSize,
+                         useHarrisDetector,
+                         k );
+            return previousImage;
+    }
+
+    // Initialization
+    std::vector<uchar> status;
+    std::vector<float> err;
+    Mat nextImage = src.clone();
+    Mat output_img = src.clone(); // Image with optk drawings
+
+    calcOpticalFlowPyrLK(
+          previousImage, nextImage, // 2 consecutive images
+          optkPoints, // input point positions in first im
+          optkPointsNext, // output point positions in the 2nd
+          status,    // tracking success
+          err      // tracking error
+        );
+
+    /// Draw how points have moved
+    //RNG rng(12345); // For random color if needed
+    for( uint i = 0; i < optkPointsNext.size(); i++ ){
+        //Scalar color = Scalar(rng.uniform(0,255), rng.uniform(0, 255), rng.uniform(0, 255));
+        Scalar color = Scalar(0, 0, 255);
+        drawArrow(output_img,optkPoints[i],optkPointsNext[i],color,5,2);
+    }
+
+
+    // If we have lost many points, recalculate shitomasi
+    previousImage = src.clone();
+    if (optkPointsNext.size() >= cornersThreshold){
+        optkPoints = optkPointsNext;
+    } else {
+        Mat src_gray;
+        /// Parameters for Shi-Tomasi algorithm
+        double qualityLevel = 0.01;
+        double minDistance = 5;
+        int blockSize = 3;
+        bool useHarrisDetector = false;
+        double k = 0.04;
+        /// Convert the image to grayscale
+        cvtColor( previousImage, src_gray, CV_BGR2GRAY );
+        /// Apply corner detection
+        goodFeaturesToTrack( src_gray,
+                     optkPoints,
+                     maxCorners,
+                     qualityLevel,
+                     minDistance,
+                     Mat(),
+                     blockSize,
+                     useHarrisDetector,
+                     k );
+    }
+
+    return output_img;
+}
+
+void ImageModifier::drawArrow(Mat& image, CvPoint p, CvPoint q, CvScalar color,
+                              int arrowMagnitude, int thickness, int line_type, int shift){
+    //Draw the principle line
+    line(image, p, q, color, thickness, line_type, shift);
+    const double PI = 3.141592653;
+    //compute the angle alpha
+    double angle = atan2((double)p.y-q.y, (double)p.x-q.x);
+    //compute the coordinates of the first segment
+    p.x = (int) ( q.x +  arrowMagnitude * cos(angle + PI/4));
+    p.y = (int) ( q.y +  arrowMagnitude * sin(angle + PI/4));
+    //Draw the first segment
+    line(image, p, q, color, thickness, line_type, shift);
+    //compute the coordinates of the second segment
+    p.x = (int) ( q.x +  arrowMagnitude * cos(angle - PI/4));
+    p.y = (int) ( q.y +  arrowMagnitude * sin(angle +- PI/4));
+    //Draw the second segment
+    line(image, p, q, color, thickness, line_type, shift);
 }

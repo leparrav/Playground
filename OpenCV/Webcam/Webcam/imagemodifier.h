@@ -19,6 +19,12 @@ class ImageModifier : public QObject{
 
 private:
     int kernel;
+    Mat previousImage;
+    vector<Point2f> optkPoints, optkPointsNext;
+    void drawArrow(Mat& image,
+                   CvPoint p, CvPoint q,
+                   CvScalar color,
+                   int arrowMagnitude = 9, int thickness=1, int line_type=8, int shift=0);
 
 public:
     explicit ImageModifier(QObject *parent = 0);
@@ -34,6 +40,10 @@ public:
     Mat corShi(Mat& src, int maxCorners);
     Mat Sift(Mat& src, int sliderCorners);
     Mat doSurf(Mat& src, int sliderCorners);
+    /** @brief Calculates Optical Flow using Shi-Tomasi corners for first image
+     * @param src - Matrix with current image
+    **/
+    Mat doOPTK(Mat& src, int sliderCorners);
 
 signals:
 

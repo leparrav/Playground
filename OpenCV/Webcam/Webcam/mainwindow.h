@@ -67,6 +67,7 @@ class MainWindow : public QMainWindow{
         void on_actionSIFT_triggered();
         void on_actionSIFT_2_triggered();
         void on_actionSURFT_triggered();
+        void on_actionOptical_Flow_triggered();
 };
 
 #endif // MAINWINDOW_H

@@ -92,6 +92,8 @@ Mat MainWindow::modifyImage(Mat& src){
             return imgMod->Sift(src, sliderCorner);
         case 9:
             return imgMod->doSurf(src,sliderHessian);
+        case 10:
+            return imgMod->doOPTK(src, sliderCorner);
     }
 
     return src;
@@ -166,4 +168,9 @@ void MainWindow::on_actionSIFT_2_triggered(){
 void MainWindow::on_actionSURFT_triggered()
 {
     modify = 9; // 9 - SURF
+}
+
+void MainWindow::on_actionOptical_Flow_triggered()
+{
+    modify = 10; // 10 - Optical Flow with SIFT Features
 }
