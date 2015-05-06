@@ -1,48 +1,12 @@
-# -----------
-# User Instructions
-# 
-# Define a function, two_pair(ranks).
+    data = open('file.csv', 'r')
 
-def two_pair(ranks):
-    """If there are two pair, return the two ranks as a
-    tuple: (highest, lowest); otherwise return None."""
-    pairs = []
-    for r in ranks:
-        if ranks.count(r) == 2:
-            pairs.append(r)
-    if len(pairs) != 2:
-        return None
-    else:
-        return tuple(pairs)
-            
+    row_index = 1
+    for line in data:
+        row = [int(each) for each in line.split()]
+        max_number = max(row)
+        colmax_index = [i for i, j in enumerate(row) if j == max_number]
+        if len(colmax_index) == 1:
+            print row_index, colmax_index[0]+1 # Remember 0 - Count
+        row_index += 1
 
-
-
-def kind(n, ranks):
-    """Return the first rank that this hand has exactly n of.
-    Return None if there is no n-of-a-kind in the hand."""
-    for r in ranks:
-        if ranks.count(r) == n: return r 
-    return None
-
-def test():
-    "Test cases for the functions in poker program."
-    sf = "6C 7C 8C 9C TC".split() # Straight Flush
-    fk = "9D 9H 9S 9C 7D".split() # Four of a Kind
-    fh = "TD TC TH 7C 7D".split() # Full House
-    tp = "TD 9H TH 7C 3S".split() # Two Pair
-    fkranks = card_ranks(fk)
-    tpranks = card_ranks(tp)
-    assert kind(4, fkranks) == 9
-    assert kind(3, fkranks) == None
-    assert kind(2, fkranks) == None
-    assert kind(1, fkranks) == 7
-    return 'tests pass'
-    
-def card_ranks(hand):
-    "Return a list of the ranks, sorted with higher first."
-    ranks = ['--23456789TJQKA'.index(r) for r, s in hand]
-    ranks.sort(reverse = True)
-    return ranks
-
-print test()
+    data.close()
