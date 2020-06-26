@@ -1,7 +1,9 @@
+import { randomString } from '../../Util/StringUtil';
+
 // Test cases
-const testStrings: string[] = new Array(1000);
+const testStrings: string[] = new Array(100);
 for(let i=0; i < testStrings.length; ++i) {
-    testStrings[i] = Math.random().toString(36).substring(7);
+    testStrings[i] = randomString(100);
 }
 
 /**
