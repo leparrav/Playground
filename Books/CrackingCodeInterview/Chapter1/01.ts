@@ -1,6 +1,6 @@
 // Test cases
-const testStrings = new Array(1000);
-for(let i=0; i < testStrings.length;i++) {
+const testStrings: string[] = new Array(1000);
+for(let i=0; i < testStrings.length; ++i) {
     testStrings[i] = Math.random().toString(36).substring(7);
 }
 
@@ -8,46 +8,42 @@ for(let i=0; i < testStrings.length;i++) {
  * Without Datastructures. Run time O(n^2)
  * @param testString 
  */
-function isUniqueWOD(testString: string): boolean {
-    for(let i = 0; i < testString.length; i++) {
-        let currentChar = testString[i];
-        for(let j = i+1; j < testString.length; j++) {
-            if (currentChar == testString[j]) {
+export function isUniqueWOD(testString: string): boolean {
+    for(let i = 0; i < testString.length; ++i) {
+        for(let j = i+1; j < testString.length; ++j) {
+            if (testString[i] == testString[j]) {
                 return false;
             }
         }
     }
-
     return true;
 }
 
 /**
- * Test if a string is... Using hashmaps O(n)
+ * Test if a string is... Using hashmaps O(n) from ES5
  * @param testString 
  */
-function isUnique(testString){
-    let hm = [];
-    for (let i = 0; i < testString.length; i++) {
-        if (hm.indexOf(testString[i]) != -1) {
+export function isUnique(testString: string){
+    let chars = new Set();
+    for (let i = 0; i < testString.length; ++i) {
+        if (chars.has(testString[i])) {
             return false;
         }
-        hm[i] = testString[i];
+        chars.add(testString[i]);
     }
     return true;
 }
 
-console.time("profiler");
-console.log('Test without Data structures')
+console.time("Test without Data structures");
 for (let item of testStrings)
 {
     isUniqueWOD(item);
 }
-console.timeEnd("profiler");
+console.timeEnd("Test without Data structures");
 
-console.time("profiler");
-console.log('Test with Data structures')
+console.time("Test with Data structures");
 for (let item of testStrings)
 {
     isUnique(item);
 }
-console.timeEnd("profiler");
+console.timeEnd("Test with Data structures");
