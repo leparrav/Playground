@@ -16,7 +16,6 @@ export function isPermutation(str1: string, str2: string): boolean {
     }
     
     for (let key of HmObj.keys()) {
-        console.log(key);
         if (!HmaTarget.has(key) ||(HmObj.get(key) != HmaTarget.get(key))) {
             return false;
         }
