@@ -7,5 +7,9 @@
     "test": "test"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jasmine": "^3.5.11",
+    "jasmine": "^3.5.0"
+  }
 }
