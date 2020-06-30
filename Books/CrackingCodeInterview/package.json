@@ -4,7 +4,8 @@
   "description": "just solutions",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "ts-node --project tsconfig.json"
   },
   "author": "",
   "license": "ISC",
